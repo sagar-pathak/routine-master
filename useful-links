@@ -1,0 +1,11 @@
+1)Git setup: http://sirupsen.com/starting-with-git/
+2)Tell git your username and email address: 
+  git config --global user.name "My Name"
+  git config --global user.email me@mydomain.com
+  git config --global color.diff auto
+  git config --global color.status auto
+  git config --global color.branch auto
+3)Remove origin
+  git remote rm origin
+4)Create origin
+  git remote add origin git@github.com:username/project-name.
