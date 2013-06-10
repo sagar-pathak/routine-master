@@ -12,7 +12,6 @@
   $dbname   = 'embedded_project';
   $con      = mysql_connect($server, $username, $password);
 
-  session_start();
   if(!$con){
       die('Couldn\'t established connection to server because '.mysql_error()); 
   }else{

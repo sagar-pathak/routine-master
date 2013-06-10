@@ -10,6 +10,9 @@
 .project_name{
     color:white;
     font-size: 25px;
+    float:left;
+    padding-top: 10px;
+    padding-right: 10px;
 }
 
 *, html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, 
