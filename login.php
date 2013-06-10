@@ -3,29 +3,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-include 'initials/connection.php';
-include 'check_session.php';
-$project_name = 'Routine Master';
-$table_name   = 'admin';
-if(isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $password = mysql_real_escape_string($_POST['password']);
-    $query    = 'SELECT username, password FROM '.$table_name;
-    $result   = mysql_query($query);
-    $status   = false;
-    while ($row = mysql_fetch_array($result)) {
-        if($row['username'] == $username && $row['password'] == $password){
-            $status = true;
+session_start();
+if(isset($_SESSION['logged_in'])){
+    header('Location: home.php');
+}else{
+    include 'initials/connection.php';
+    $project_name = 'Routine Master';
+    $table_name   = 'admin';
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $password = mysql_real_escape_string($_POST['password']);
+        $query    = 'SELECT username, password FROM '.$table_name;
+        $result   = mysql_query($query);
+        $status   = false;
+        while ($row = mysql_fetch_array($result)) {
+            if($row['username'] == $username && $row['password'] == $password){
+                $status = true;
+            }
         }
-    }
-    if($status == true){
-      
-        $_SESSION['user_name']=($_POST['username']);
-        $_SESSION['logged_in']=True;
-        header('Location: check_session.php');
-    }else{
-        $_SESSION['error'] = 'Authentication Failed';
+        if($status == true){
+            $_SESSION['user_name']=$_POST['username'];
+            $_SESSION['logged_in']=True;
+            header('Location: check_session.php');
+        }else{
+            $_SESSION['error'] = 'Authentication Failed';
+        }
     }
 }
 ?>

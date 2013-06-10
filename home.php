@@ -8,7 +8,7 @@
   Purpose of the php file as follows.
  */
 session_start();
-echo $_SESSION['user_name'].'<br/>';
+echo  $_SESSION['user_name'].'<br/>';
 ?>
 
 
