@@ -37,12 +37,12 @@ if(!isset($_SESSION['logged_in'])){
                     <div class="project_name"><?php echo $project_name;?></div>
                     <li style="margin-left:850px"><a href="#" 
                      class="round button dark menu-user image-left">
-                            Logged in as <strong><?php echo $username.'___'; ?></strong></a>
+                            Logged in as <strong><?php echo $username; ?></strong></a>
                         <ul>
-                            <li><a href="#">My Profile</a></li>
-                            <li><a href="#">User Settings</a></li>
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="logout.php">Log out</a></li>
+                            <li style="width:119px"><a href="#">My Profile</a></li>
+                            <li style="width:119px"><a href="#">User Settings</a></li>
+                            <li style="width:119px"><a href="#">Change Password</a></li>
+                            <li style="width:119px"><a href="logout.php">Log out</a></li>
                         </ul> 
                     </li>
               <!--      <li><a href="#" class="round button dark menu-email-special image-left">3 new messages</a></li>
