@@ -7,5 +7,7 @@
   Description:
   Purpose of the php file as follows.
  */
+echo $_COOKIE['semester'];
+echo 'and '.$_COOKIE['department_name'];
 ?>
 upda
