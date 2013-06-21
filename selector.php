@@ -21,7 +21,7 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
             header("Location: " . $addDepartmentFile);
         } else {
             setcookie("department_name",$department_name,time()+3600);
-            setcookie("semester",$semester ,time()+3600);
+            setcookie("semester",$semester,time()+3600);
             header("Location: ".$_SERVER["PHP_SELF"]."?opt=1");
         }
     }
@@ -57,7 +57,7 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
         <tr>
             <td>Semester</td>
             <td>
-                <select>
+                <select name="semester">
                     <option value="1">First</option>
                     <option value="2">Second</option>
                     <option value="3">Third</option>
