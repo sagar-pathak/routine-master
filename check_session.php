@@ -8,7 +8,7 @@
  */
 session_start();
 if(isset($_SESSION['logged_in'])){
-    header('Location: home.php');
+    header('Location: home.php?opt=1');
 }else{
     $_SESSION['no_session']=true;
     header('Location: login.php');

@@ -66,9 +66,9 @@ if(!isset($_SESSION['logged_in'])){
                 <div class="side-menu fl">
                     <h3>Options</h3>
                     <ul>
-                        <li><a href="#">Create Routine</a></li>
-                        <li><a href="#">Edit Routine</a></li>
-                        <li><a href="#">Update Course</a></li>
+                        <li><a href="<?php echo $_SERVER["PHP_SELF"].'?opt=1';?>">Create Routine</a></li>
+                        <li><a href="<?php echo $_SERVER["PHP_SELF"].'?opt=2';?>">Edit Routine</a></li>
+                        <li><a href="<?php echo $_SERVER["PHP_SELF"].'?opt=3';?>">Update Course</a></li>
                         
                     </ul>
                 </div> <!-- end side-menu -->
@@ -80,8 +80,11 @@ if(!isset($_SESSION['logged_in'])){
                                 <span class="fr expand-collapse-text">Click to collapse</span>
                                 <span class="fr expand-collapse-text initial-expand">Click to expand</span>
                             </div> <!-- end content-module-heading -->
-                            <div class="content-module-main">
-                                <h1>This is an H1 heading</h1>
+                            <div class="content-module-main ">
+                               
+                               <?php
+                               /*
+                                 <h1>This is an H1 heading</h1>
                                 <p>Followed by a very short paragraph and a stripe content separator.</p>
                                 <div class="stripe-separator"><!-- --></div>
                                 <h2>This is an H2 heading</h2>
@@ -93,7 +96,24 @@ if(!isset($_SESSION['logged_in'])){
                                     any extra tweaks needed from you.</p>
                                 <div class="stripe-separator"><!-- --></div>
                                 <blockquote>This is a blockquote followed by a cite tag. And no matter how much text you put in this, it will automatically resize.</blockquote>
-                                <cite>- John</cite>
+                                <cite>- John</cite> 
+                                */
+                               if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
+                                    $option = $_GET['opt'];
+                                    if($option == 1){
+                                        include 'operation/create_routine.php';
+                                    }else if($option == 2){
+                                        include 'operation/edit_routine.php';
+                                    }else if($option == 3){
+                                        include 'operation/update_courses.php';
+                                    }else{
+                                        include 'operation/create_routine.php';
+                                    }
+                               }else{
+                                    include 'selector.php';
+                               }
+                               ?>
+                                
                             </div> <!-- end content-module-main -->
                         </div> <!-- end content-module -->
                    <!-- </div> end half-size-column-->
