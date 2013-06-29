@@ -42,7 +42,7 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
                     <?php
                     while ($row = mysql_fetch_array($result)) {
                         $branch = $row['branch'];
-                        $query1 = 'SELECT department_name FROM department WHERE branch = "' . $branch . '" ORDER BY department_name ASC';
+                        $query1 = 'SELECT * FROM department WHERE branch = "' . $branch . '" ORDER BY department_name ASC';
                         $result1 = mysql_query($query1);
                         echo '<optgroup label="' . $branch . '">';
                         while ($row1 = mysql_fetch_array($result1)) {
@@ -59,14 +59,14 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
          <div class="col">Semester</div>
          <div class="col">
               <select name="semester">
-                    <option>First</option>
-                    <option>Second</option>
-                    <option>Third</option>
-                    <option>Fourth</option>
-                    <option>Fifth</option>
-                    <option>Sixth</option>
-                    <option>Seventh</option>
-                    <option>Eighth</option>
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Fourth</option>
+                    <option value="5">Fifth</option>
+                    <option value="6">Sixth</option>
+                    <option value="7">Seventh</option>
+                    <option value="8">Eighth</option>
                 </select>
          </div>
     </div>

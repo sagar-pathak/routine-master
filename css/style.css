@@ -6,6 +6,9 @@
         Author: Sagar Pathak
         
 **********************************************************************************/
+input[class="modified"]{
+    width: 400px;
+}
 
 .option_table{
     width: 500px;
