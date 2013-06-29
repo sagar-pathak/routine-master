@@ -47,11 +47,20 @@ if (isset($_POST['submit_course_no'])) {
         $i++;
     }
     $i = 1;
-    while($i <= $number){
-    $query = 'INSERT INTO courses (course_code,department_id,semester,course_title,course_credit,course_password) 
-            VALUES ("' . ${'course_code' . $i} . '",' . $department_id . ',' . $semester . ',"' . ${'course_title' . $i} . '",' . ${'course_credit' . $i} . ',"' . ${'course_password' . $i} . '");';
+    while ($i <= $number) {
+        $course_code =  ${'course_code' . $i};
+        $course_title = ${'course_title' . $i};
+        $course_credit = ${'course_credit' . $i};
+         $course_password = ${'course_password' . $i};
+        $sql = 'INSERT INTO courses (course_code,department_id,semester,course_title,course_credit,course_password) 
+            VALUES ("' .$course_code. '",' . $department_id . ',' . $semester . ',"' 
+                .  $course_title . '",' .  $course_credit. ',"' .$course_password . '")';
+        if(mysql_query($sql)){
+        }else{
+            die(mysql_error());
+            exit(0);
+        }
+        $i++;
     }
-    
-    echo '<br/>' . $query;
 }
 ?>

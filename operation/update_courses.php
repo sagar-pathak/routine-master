@@ -6,7 +6,7 @@
   Description:
   Purpose of the php file as follows.
  */
-//include "option_display.php";
+include "option_display.php";
 $redirected_to = '/routine-master/set_course_no.php';
 ?>
 <link rel="stylesheet" href="../css/sample.css"/>
@@ -43,7 +43,7 @@ if (!isset($_COOKIE['c_no'])) {
         exit(0);
     }
     echo '<form action= "' . $redirected_to . '" method="POST">';
-    echo 'Enter total number of course in <i><font color="red"> ' .$call_semester . '</font></i> semester of <i><font color="red">' . $_COOKIE['department_name'] . '</font></i>.';
+    echo 'Enter total number of course of <i><font color="red"> ' .$call_semester . '</font></i> semester of <i><font color="red">' . $_COOKIE['department_name'] . '</font></i>.';
     echo '<BR/><input type="text" name="total_courses"/>';
     echo '<br/><input type="submit" name="submit_course_no" value="submit"/>';
     echo '</form>';
