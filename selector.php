@@ -12,24 +12,19 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
     }else{
         header("Location: home.php?opt=1");//.$option);
     }
-}else{
+}else{ 
     include 'initials/connection.php';
     $getOption = $_GET['opt'];
     setcookie("option",$getOption,  time() + 3600,"/");
-    $addDepartmentFile = "add_new_department.php";
     $query = 'SELECT DISTINCT branch FROM department ORDER BY branch ASC';
     $result = mysql_query($query);
     
     if (isset($_POST["submit"])) {
         $department_name = $_POST['department'];
         $semester        = $_POST['semester'];
-        if ($department_name == 'addNew') {
-            header("Location: " . $addDepartmentFile);
-        } else {   
-            setcookie("department_name",$department_name,time()+3600,"/");
-            setcookie("semester",$semester,time()+3600,"/");
-            header("Location: ".$_SERVER["PHP_SELF"]."?opt=".$_COOKIE['option']);
-        }
+        setcookie("department_name",$department_name,time()+3600,"/");
+        setcookie("semester",$semester,time()+3600,"/");
+        header('Location: '.$_SERVER["PHP_SELF"].'?opt='.$_COOKIE['option']);
     }
     if (isset($_COOKIE['new_branch'])) {
         setcookie("new_branch", "", time() - 3600, "/");
@@ -37,14 +32,13 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
 }
 
 ?>
-
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
-    <div class="option_table">
-    <table>
-        <tr>
-            <td> Department</td>
-            <td>
-                <select name="department">
+<link href="css/sample.css" rel="stylesheet" type="text/css" />
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">       
+<div class="container" style="width:410px">
+    <div class="table-row">
+         <div class="col">Department</div>
+         <div class="col">
+              <select name="department">
                     <?php
                     while ($row = mysql_fetch_array($result)) {
                         $branch = $row['branch'];
@@ -57,14 +51,14 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
                         echo '</optgroup>';
                     }
                     ?>
-                    <option name ="addNew" value="addNew">Add New</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Semester</td>
-            <td>
-                <select name="semester">
+            
+         </div>
+    </div>
+    <div class="table-row">
+         <div class="col">Semester</div>
+         <div class="col">
+              <select name="semester">
                     <option>First</option>
                     <option>Second</option>
                     <option>Third</option>
@@ -74,13 +68,16 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
                     <option>Seventh</option>
                     <option>Eighth</option>
                 </select>
-            </td>
-        </tr>
-        <tr><td></td>
-            <td align="left">
-                <input class="button round blue image-right" type="submit" name="submit" value="SELECT"/>
-            </td>
-        </tr>    
-    </table>
+         </div>
+    </div>
+  
+        
+       
+    
 </div>
+    <p>
+        
+        <div style="padding-left:0px"><input style="width:195px"class="button round blue" type="submit" name="submit" value="SELECT"/></div>
+    </p>
+    
 </form>

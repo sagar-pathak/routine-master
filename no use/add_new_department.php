@@ -15,7 +15,10 @@ $result = mysql_query($query);
 
 if (isset($_POST['submitNow'])) {
     if ($_POST['branch'] == "add_new_branch") {
+        setcookie("new_branch",$add_new_branch,time()+3600,"/");
+        setcookie("new_department"," ",time()-3600,"/");
         header("Location: " . $add_new_branch);
+       // header("Location: ".$_SERVER["PHP_SELF"]."?opt=".$_COOKIE['option']);
     } else {
         $department_name = $_POST['new_department'];
         $department_desc = $_POST['depart_desc'];

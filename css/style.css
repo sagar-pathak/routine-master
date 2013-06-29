@@ -203,6 +203,14 @@ p a, p a:hover { border-bottom: 1px dotted; }
     background-color: #5081b3;
     color: white;
 }
+.red{
+    background-color: #edb2b2;
+    color: white;
+}
+.red:hover {
+    background-color: #a41919;
+    color: white;
+}
 
 
 

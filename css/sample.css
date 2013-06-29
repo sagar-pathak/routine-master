@@ -8,7 +8,7 @@
 .container{
     display:table;
     width:90%;
-    border-collapse: collapse;
+    border-collapse: collapse; 
     }
 .heading{
      font-weight: bold;
@@ -27,5 +27,6 @@
 }
 .col{
     display:table-cell;
-    border: 1px solid #CCC;
+    text-align: left;
+ /*   border: 1px solid #CCC;  */
 }
