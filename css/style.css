@@ -48,8 +48,7 @@ h5, h6, pre, form, label, fieldset, input, p, blockquote, th, td {
 
 table {
     border-collapse: collapse;
-    border-spacing: 0;
-   
+    border-spacing: 0; 
 }
 fieldset, img {	border: 0; }
 
@@ -171,9 +170,10 @@ body, form {
     line-height: 1.125em; /* 18/16 */
 }
 
-p, .button, form input, ul#nav li ul, ul#tabs, div.side-menu ul li a, table,
+p, .button, form input, ul#nav li ul, ul#tabs, div.side-menu ul li a,/* table, */
 .information-box, .confirmation-box, .error-box, .warning-box, ol, .regular-ul, 
 .custom-ul, blockquote, cite { font-size: 0.75em; /* 12/16 */ }
+
 
 div.content-module-heading span { font-size: 0.625em; /* 10/16 */ }
 
@@ -319,7 +319,8 @@ form label.alt-label { text-transform: none; }
 
 form input[type="text"], input[type="password"], textarea {
     border: 1px solid #d9dbdd;
-    padding: 1em 0.625em; /* 16/16 10/16 */
+  /*  padding: 1em 0.625em;  16/16 10/16 */
+    height:2em;
     outline: none;
 }
 form input[type="text"]:hover, input[type="password"]:hover, textarea:hover,

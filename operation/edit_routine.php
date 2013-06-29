@@ -7,5 +7,6 @@
   Description:
   Purpose of the php file as follows.
  */
+include 'option_display.php';
 ?>
 edit

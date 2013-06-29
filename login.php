@@ -5,7 +5,8 @@
  */
 session_start();
 if(isset($_SESSION['logged_in'])){
-    header('Location: home.php');
+    $option = $_GET['opt'];
+    header('Location: home.php?opt='.$option);
 }else{
     include 'initials/connection.php';
     $project_name = 'Routine Master';

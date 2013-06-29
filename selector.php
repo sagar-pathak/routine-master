@@ -7,28 +7,35 @@
   Purpose of the php file as follows.
  */
 if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
-    $option = $_GET['opt'];
-    header("Location: home.php?opt=".$option);
+    if(isset($_COOKIE['option'])){
+        header("Location: home.php?opt=".$_COOKIE['option']);
+    }else{
+        header("Location: home.php?opt=1");//.$option);
+    }
 }else{
     include 'initials/connection.php';
+    $getOption = $_GET['opt'];
+    setcookie("option",$getOption,  time() + 3600,"/");
     $addDepartmentFile = "add_new_department.php";
     $query = 'SELECT DISTINCT branch FROM department ORDER BY branch ASC';
     $result = mysql_query($query);
+    
     if (isset($_POST["submit"])) {
         $department_name = $_POST['department'];
         $semester        = $_POST['semester'];
         if ($department_name == 'addNew') {
             header("Location: " . $addDepartmentFile);
-        } else {
-            setcookie("department_name",$department_name,time()+3600);
-            setcookie("semester",$semester,time()+3600);
-            header("Location: ".$_SERVER["PHP_SELF"]."?opt=1");
+        } else {   
+            setcookie("department_name",$department_name,time()+3600,"/");
+            setcookie("semester",$semester,time()+3600,"/");
+            header("Location: ".$_SERVER["PHP_SELF"]."?opt=".$_COOKIE['option']);
         }
     }
     if (isset($_COOKIE['new_branch'])) {
         setcookie("new_branch", "", time() - 3600, "/");
     }
 }
+
 ?>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
@@ -58,14 +65,14 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
             <td>Semester</td>
             <td>
                 <select name="semester">
-                    <option value="1">First</option>
-                    <option value="2">Second</option>
-                    <option value="3">Third</option>
-                    <option value="4">Fourth</option>
-                    <option value="5">Fifth</option>
-                    <option value="6">Sixth</option>
-                    <option value="7">Seventh</option>
-                    <option vlaue="8">Eighth</option>
+                    <option>First</option>
+                    <option>Second</option>
+                    <option>Third</option>
+                    <option>Fourth</option>
+                    <option>Fifth</option>
+                    <option>Sixth</option>
+                    <option>Seventh</option>
+                    <option>Eighth</option>
                 </select>
             </td>
         </tr>

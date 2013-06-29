@@ -23,6 +23,7 @@ if(!isset($_SESSION['logged_in'])){
         <title><?php echo $project_name;?> - Home page</title>
         <!-- Stylesheets -->
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/sample.css">
         <!-- Optimize for mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <!-- jQuery & JS files -->
@@ -98,8 +99,12 @@ if(!isset($_SESSION['logged_in'])){
                                 <blockquote>This is a blockquote followed by a cite tag. And no matter how much text you put in this, it will automatically resize.</blockquote>
                                 <cite>- John</cite> 
                                 */
-                               if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
-                                    $option = $_GET['opt'];
+                               if((isset($_COOKIE['department_name']) && isset($_COOKIE['semester']))){
+                                   if(isset($_GET['opt'])){
+                                        $option = $_GET['opt'];
+                                   } else{
+                                       $option = 1;
+                                   }
                                     if($option == 1){
                                         include 'operation/create_routine.php';
                                     }else if($option == 2){

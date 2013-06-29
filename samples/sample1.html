@@ -1,0 +1,40 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+    <html>  
+    <head>  
+        <title>Javascript Show Hide Div Visibility</title>  
+        <style type="text/css">  
+            .divStyle {  
+                width: 200px;  
+                height: 100px;  
+                margin: 0px auto;  
+            }  
+        </style>  
+      
+        <script language="javascript" type="text/javascript">  
+            function showHideDiv() { 
+                var divstyle = new String(); 
+                divstyle = document.getElementById("div1").style.visibility; 
+                if (divstyle.toLowerCase() == "visible" || divstyle == "") { 
+                    document.getElementById("div1").style.visibility = "hidden"; 
+                } 
+                else { 
+                    document.getElementById("div1").style.visibility = "visible"; 
+                } 
+            }    
+        </script>  
+    </head>  
+    <body>  
+        <div id="div1" class="divStyle">  
+            Show Hide Div visibility using Javascript DOM.  
+        </div>  
+        <center>  
+            <input type="button"   
+                    value="show hide div"   
+                    onclick="showHideDiv()" />  
+        </center>  
+    </body>  
+    </html>  
+
