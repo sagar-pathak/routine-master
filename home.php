@@ -118,6 +118,8 @@ if (!isset($_SESSION['logged_in'])) {
                                     include 'operation/add_branch_dept.php';
                                 } else if($option == 5){
                                     include 'add_new_branch.php';
+                                }else if($option == 7){
+                                    include 'notifier.php';
                                 }else {
                                     include 'operation/create_routine.php';
                                 }

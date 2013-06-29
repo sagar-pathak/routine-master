@@ -8,6 +8,7 @@
   Purpose of the php file as follows.
  */
 $redirected_to = '/routine-master/home.php?opt=3';
+$redirected_to_notifier = '/routine-master/home.php?opt=7';
 if (isset($_POST['submit_course_no'])) {
     $number = $_POST['total_courses'];
     setcookie("c_no", $number, time() + 3600, "/");
@@ -62,5 +63,6 @@ if (isset($_POST['submit_course_no'])) {
         }
         $i++;
     }
+    header("Location:".$redirected_to_notifier);
 }
 ?>
