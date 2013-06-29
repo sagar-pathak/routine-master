@@ -20,7 +20,7 @@ $redirected_to = '/routine-master/home.php?opt=3';
     <font color="green" size="40px"><b>
     SUCCESS!!
     </b></font>
-    <a style="text-decoration: none" href="<?php echo $redirected_to;?>"><div >GO HOME</div></a>
+    <a style="text-decoration: none" href="<?php echo $redirected_to;?>"><div >RETURN</div></a>
 </div>
 <BR/>
 
