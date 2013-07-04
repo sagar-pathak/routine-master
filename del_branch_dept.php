@@ -10,6 +10,11 @@ include 'initials/connection.php';
 $query = "SELECT * FROM department";
 $result = mysql_query($query);
 ?>
+<script type="text/javascript">
+    function check(){
+        return confirm("Are you sure you want to delete?");
+    }
+</script>
 <link href="css/sample.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/style.css">
 <div class="container" style="width:500px">
@@ -35,7 +40,7 @@ $result = mysql_query($query);
         echo '</div>';
 
         //echo '<div class="col round red">';
-        echo '<a href="'.$link.'?id='.$department_id.'">
+        echo '<a href="'.$link.'?id='.$department_id.'" onclick="return check()">
                 <div class="col round red">
                 DELETE
                 </div>
