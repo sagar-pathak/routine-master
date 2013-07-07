@@ -78,7 +78,34 @@ if (!isset($_SESSION['logged_in'])) {
                     <!--  <div class="half-size-column fl"> -->
                     <div class="content-module">
                         <div class="content-module-heading cf">
-                            <h3 class="fl">Headings &amp; Paragraphs</h3>
+                            <h3 class="fl">
+                                <?php
+                                if (isset($_GET['opt'])) {
+                                    $option = $_GET['opt'];
+                                } else {
+                                    $option = 1;
+                                }
+                                switch ($option){
+                                    case 1: 
+                                        echo 'CREATE ROUTINE';
+                                        break;
+                                    case 2:
+                                        echo 'EDIT ROUTINE';
+                                        break;
+                                    case 3:
+                                        echo 'UPDATE COURSES';
+                                        break;
+                                    case 4:
+                                        echo 'ADD BRANCH/DEPARTMENT';
+                                        break;
+                                    case 5:
+                                        echo 'DELETE BRANCH/DEPARTMENT';
+                                        break;
+                                    default:
+                                        echo 'CREATE ROUTINE';
+                                        break;
+                                }
+                                ?></h3>
                             <span class="fr expand-collapse-text">Click to collapse</span>
                             <span class="fr expand-collapse-text initial-expand">Click to expand</span>
                         </div> <!-- end content-module-heading -->
@@ -101,8 +128,8 @@ if (!isset($_SESSION['logged_in'])) {
                               <cite>- John</cite>
                              */
                             if ((isset($_COOKIE['department_name']) && isset($_COOKIE['semester']))) {
-                                 setcookie("new_depart"," ",time()-3600,"/");
-                                 setcookie("new_branch"," ",time()-3600,"/");
+                                setcookie("new_depart", " ", time() - 3600, "/");
+                                setcookie("new_branch", " ", time() - 3600, "/");
                                 if (isset($_GET['opt'])) {
                                     $option = $_GET['opt'];
                                 } else {
@@ -116,31 +143,31 @@ if (!isset($_SESSION['logged_in'])) {
                                     include 'operation/update_courses.php';
                                 } else if ($option == 4) {
                                     include 'operation/add_branch_dept.php';
-                                } else if($option == 5){
+                                } else if ($option == 5) {
                                     include 'add_new_branch.php';
-                                } else if($option == 6){
+                                } else if ($option == 6) {
                                     include 'add_new_depart.php';
-                                }else if($option == 7){
+                                } else if ($option == 7) {
                                     include 'del_branch_dept.php';
-                                }else if($option == 8){
+                                } else if ($option == 8) {
                                     include 'notifier.php';
-                                }else {
+                                } else {
                                     include 'operation/create_routine.php';
                                 }
                             } else {
-                                if(isset($_GET['opt'])){
+                                if (isset($_GET['opt'])) {
                                     if ($_GET['opt'] == '4') {
                                         include 'operation/add_branch_dept.php';
-                                    }else if($_GET['opt'] == '5'){
+                                    } else if ($_GET['opt'] == '5') {
                                         include 'add_new_branch.php';
-                                    }else if($_GET['opt'] == '6'){
-                                         include 'add_new_depart.php';
-                                    }else if($_GET['opt'] == '7'){
-                                         include 'del_branch_dept.php';
-                                    }else{
+                                    } else if ($_GET['opt'] == '6') {
+                                        include 'add_new_depart.php';
+                                    } else if ($_GET['opt'] == '7') {
+                                        include 'del_branch_dept.php';
+                                    } else {
                                         include 'selector.php';
                                     }
-                                }else {
+                                } else {
                                     include 'selector.php';
                                 }
                             }
