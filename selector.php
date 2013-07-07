@@ -26,9 +26,6 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
         setcookie("semester",$semester,time()+3600,"/");
         header('Location: '.$_SERVER["PHP_SELF"].'?opt='.$_COOKIE['option']);
     }
-    if (isset($_COOKIE['new_branch'])) {
-        setcookie("new_branch", "", time() - 3600, "/");
-    }
 }
 
 ?>
@@ -69,11 +66,7 @@ if(isset($_COOKIE['department_name']) && isset($_COOKIE['semester'])){
                     <option value="8">Eighth</option>
                 </select>
          </div>
-    </div>
-  
-        
-       
-    
+    </div>     
 </div>
     <p>
         

@@ -50,7 +50,7 @@ if (!isset($_COOKIE['c_no'])) {
 } else {
     $specified_range = $_COOKIE['c_no'];
     $i = 1;
-     echo '<form action= "' . $redirected_to . '" method="POST">';
+    echo '<form action= "' . $redirected_to . '" method="POST">';
     echo '<div class="container" style="width:700px">
     <div class="heading">
         <div class="col">COURSE CODE</div>

@@ -4,29 +4,29 @@
  * and open the template in the editor.
  */
 session_start();
-if(isset($_SESSION['logged_in'])){
+if (isset($_SESSION['logged_in'])) {
     $option = $_GET['opt'];
-    header('Location: home.php?opt='.$option);
-}else{
+    header('Location: home.php?opt=' . $option);
+} else {
     include 'initials/connection.php';
     $project_name = 'Routine Master';
-    $table_name   = 'admin';
-    if(isset($_POST['submit'])){
+    $table_name = 'admin';
+    if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $password = mysql_real_escape_string($_POST['password']);
-        $query    = 'SELECT username, password FROM '.$table_name;
-        $result   = mysql_query($query);
-        $status   = false;
+        $query = 'SELECT username, password FROM ' . $table_name;
+        $result = mysql_query($query);
+        $status = false;
         while ($row = mysql_fetch_array($result)) {
-            if($row['username'] == $username && $row['password'] == $password){
+            if ($row['username'] == $username && $row['password'] == $password) {
                 $status = true;
             }
         }
-        if($status == true){
-            $_SESSION['user_name']=$_POST['username'];
-            $_SESSION['logged_in']=True;
+        if ($status == true) {
+            $_SESSION['user_name'] = $_POST['username'];
+            $_SESSION['logged_in'] = True;
             header('Location: check_session.php');
-        }else{
+        } else {
             $_SESSION['error'] = 'Authentication Failed';
         }
     }
@@ -39,6 +39,10 @@ if(isset($_SESSION['logged_in'])){
         <title><?php echo $project_name; ?> Administrator- Login</title>
         <!-- Stylesheets -->
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-1.9.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+       
         <!-- Optimize for mobile devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
     </head>
@@ -64,13 +68,14 @@ if(isset($_SESSION['logged_in'])){
         </div> <!-- end header -->
         <!-- MAIN CONTENT -->
         <div id="content">
-            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" id="login-form">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="login-form">
                 <fieldset>
-                    <?php //error printing box
-                        if(isset($_SESSION['error'])){
-                            echo '<p class="error-box">'.$_SESSION['error'].'</p>';
-                            unset($_SESSION['error']);
-                        }
+                    <?php
+                    //error printing box
+                    if (isset($_SESSION['error'])) {
+                        echo '<p class="error-box">' . $_SESSION['error'] . '</p>';
+                        unset($_SESSION['error']);
+                    }
                     ?>
                     <p>
                         <label for="login-username">username</label>
@@ -91,7 +96,7 @@ if(isset($_SESSION['logged_in'])){
 
             <p>&copy; Copyright 2013 <a href="www.ku.edu.np"> Kathmandu University </a>. All rights reserved.</p>
             <p><strong><?php echo $project_name; ?></strong> by <a href="credits.php"> Group-I</a></p>
-
+         
         </div> <!-- end footer -->
 
     </body>
