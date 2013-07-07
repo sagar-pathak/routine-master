@@ -9,6 +9,7 @@
  */
 include 'option_display.php';
 include 'initials/connection.php';
+$redirected_to = '/routine-master/home.php?opt=1';
 $department_name = $_COOKIE['department_name'];
 $semester = $_COOKIE['semester'];
 $table_name = 'courses';
@@ -41,6 +42,8 @@ if(isset($_POST['set_routine'])){
         }
         $i++;
     }
+    setcookie('success_notifier',$day,  time()+3600,'/');
+    header('Location: '.$redirected_to);
 }
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -49,11 +52,13 @@ if(isset($_POST['set_routine'])){
     <?php
     if(isset($_COOKIE['success_notifier'])){
         echo '<div class="table-row">
-             <div class="col information-box">Routine has been successfully created for '.$_COOKIE['success_notifier'].'</div> 
-        </div>';
+             <div class="col information-box" style="width:70%">Routine has been successfully created for '.$_COOKIE['success_notifier'].'</div> 
+        </div><br/>';
         setcookie('success_notifier','',  time()-3600,'/');
     }
     ?>
+</div>
+    <div class="container">
     <div class="table-row">
         <div class="col" style="width:10%">Select</div>
          <div class="col" style="width:20%">Choose Day</div>
