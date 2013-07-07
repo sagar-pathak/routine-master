@@ -60,8 +60,8 @@ if(isset($_POST['set_routine'])){
 </div>
     <div class="container">
     <div class="table-row">
-        <div class="col" style="width:10%">Select</div>
-         <div class="col" style="width:20%">Choose Day</div>
+        <div class="col" style="width:10%"></div>
+         <div class="col" style="width:20%">Choose Day:</div>
          <div class="col" style="width:50%"><p>
              <select name="day">
                     <option value="Sunday">Sunday</option>
