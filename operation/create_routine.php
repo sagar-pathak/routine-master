@@ -19,6 +19,8 @@ $row = mysql_fetch_array($result_set_first);
 $department_id = $row['department_id'];
 $query = 'SELECT course_code, course_title FROM '.$table_name.' WHERE (department_id = '.$department_id.'  AND semester = '.$semester.' )';
 $result = mysql_query($query);
+$query1 = 'SELECT course_code, course_title FROM '.$table_name.' WHERE (department_id = '.$department_id.'  AND semester = '.$semester.' AND lab = 1 )';
+$result1 = mysql_query($query1);
 
 //INSERTING ROUTINE INTO TABLE
 if(isset($_POST['set_routine'])){
@@ -89,6 +91,15 @@ if(isset($_POST['set_routine'])){
             <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_'.$count.'" value="yes" /></div>
              <div class="col" style="width:20%"><input type="hidden" value="'.$row['course_code'].'" name="course_code_'.$count.'"/> '.$row['course_code'].'</div>
              <div class="col" style="width:50%">'.$row['course_title'].'</div>
+             <div class="col" style="width:20%"><input type="text" name="time_to_n_from_'.$count.'" /></div>
+        </div>';
+        $count ++;
+    }
+    while($row = mysql_fetch_array($result1)){
+        echo '<div class="table-row">
+             <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_'.$count.'" value="yes" /></div>
+             <div class="col" style="width:20%"><input type="hidden" value="'.$row['course_code'].'[LAB]" name="course_code_'.$count.'"/> '.$row['course_code'].' [LAB]</div>
+             <div class="col" style="width:50%">'.$row['course_title'].' [LAB]</div>
              <div class="col" style="width:20%"><input type="text" name="time_to_n_from_'.$count.'" /></div>
         </div>';
         $count ++;

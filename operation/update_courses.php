@@ -54,7 +54,8 @@ if (!isset($_COOKIE['c_no'])) {
     echo '<div class="container" style="width:700px">
     <div class="heading">
         <div class="col">COURSE CODE</div>
-        <div class="col" style="width:50%">COURSE TITLE</div>
+        <div class="col" style="width:40%">COURSE TITLE</div>
+        <div class="col">LAB </div>
         <div class="col">COURSE CREDITS</div>
         <div class="col">COURSE PASSWORD</div>
     </div> ';
@@ -63,6 +64,7 @@ if (!isset($_COOKIE['c_no'])) {
         echo '<div class="table-row">
                     <div class="col"><input type="text" name="course_code'.$i.'"></div>
                     <div class="col"><input class="modified" type="text" name="course_title'.$i.'"></div>
+                    <div class="col"><input type="checkbox" value="yes" name="lab_'.$i.'"></div>  
                     <div class="col"><input type="text" name="course_credit'.$i.'"></div>
                     <div class="col"><input type="text" name="course_password'.$i.'"></div>
                 </div> ';
