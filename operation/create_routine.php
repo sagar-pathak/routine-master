@@ -140,12 +140,21 @@ if (isset($_POST['set_routine'])) {
             $count++;
         }
         ?>
+    </div>
+    <div class="container">
+        <div class="table-row">
+             <div class="col" style="width:10%;border: 1px solid #CCC;"><input type="checkbox" name="choose_this_course_<?php $count++;echo $count;?>" value="yes" /></div>
+             <div class="col" style="width:20%;border: 1px solid #CCC;"><input type="hidden" value="LUNCH" name="course_code_<?php echo $count;?>"/> LUNCH </div>
+             <div class="col" style="width:50%;border: 1px solid #CCC;">LUNCH</div>
+             <div class="col" style="width:20%"><input type="text" name="time_to_n_from_<?php echo $count;?>" /></div>
+        </div>
+    </div>
+    <div class="container">
         <div class="table-row">
             <div class="col" style="width:10%"><input type="hidden" name="count" value="<?php echo $count; ?>"/></div>
             <div class="col" style="width:20%"><input type="submit" name="set_routine" value="SET ROUTINE" /></div>
             <div class="col" style="width:50%"></div>
             <div class="col" style="width:20%"></div>
-
         </div>
     </div>
 </p>
