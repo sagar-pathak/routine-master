@@ -64,6 +64,18 @@ if (isset($_POST['set_routine'])) {
                 die(mysql_error());
                 exit(0);
             }
+        }else{
+            //if checkbox unchecked then proceed for deletion :)
+             $course_code = $_POST['course_code_' . $i];
+             $query_deletion = 'DELETE FROM `'.$table_name1.'` WHERE `course_code` = "'.$course_code.'" 
+                 AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' 
+                 AND `group` = "'.$selected_group.'" AND `day` = "'.$day.'"';
+             if(mysql_query($query_deletion)){
+                 
+             }else{
+                 die(mysql_error());
+                 exit();
+             }
         }
         $i++;
     }
