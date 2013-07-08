@@ -100,13 +100,13 @@ if (isset($_POST['new_group_set'])) {
             <div class="col" style="width:23%">Choose Day:</div>
             <div class="col">
                 <select name="day">
-                    <option value="Sunday">Sunday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday"<?php if(isset($day)){if($day == "Sunday"){echo ' selected ';}}?>>Sunday</option>
+                    <option value="Monday"<?php if(isset($day)){if($day == "Monday"){echo ' selected ';}}?>>Monday</option>
+                    <option value="Tuesday"<?php if(isset($day)){if($day == "Tuesday"){echo ' selected ';}}?>>Tuesday</option>
+                    <option value="Wednesday"<?php if(isset($day)){if($day == "Wednesday"){echo ' selected ';}}?>>Wednesday</option>
+                    <option value="Thursday"<?php if(isset($day)){if($day == "Thursday"){echo ' selected ';}}?>>Thursday</option>
+                    <option value="Friday"<?php if(isset($day)){if($day == "Friday"){echo ' selected ';}}?>>Friday</option>
+                    <option value="Saturday"<?php if(isset($day)){if($day == "Saturday"){echo ' selected ';}}?>>Saturday</option>
                 </select>
 
             </div>
