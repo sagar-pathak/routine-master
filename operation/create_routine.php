@@ -28,6 +28,9 @@ $result2 = mysql_query($query2);
 if(isset( $_COOKIE['day'])){
     $day   = $_COOKIE['day'];
 }
+if(isset($_COOKIE['group'])){
+    $selected_group = $_COOKIE['group'];
+}
 if (isset($_POST['set_routine'])) {
     $count = $_POST['count'];
     $group = $_POST['group_name'];
@@ -38,9 +41,9 @@ if (isset($_POST['set_routine'])) {
             $time = $_POST['time_to_n_from_' . $i];
             
             //check whether the routine has been already set up or not
-            //TODO: error arising
             $query_internal = 'SELECT course_code FROM routine where (`course_code` = "'.$course_code.'" 
-                 AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+                 AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' 
+                     AND `group` = "'.$group.'" AND `day` = "'.$day.'")';
             $result_set_number=mysql_query($query_internal);
             $row=  mysql_fetch_array($result_set_number);
             if($row['course_code']==NULL){
@@ -66,8 +69,12 @@ if (isset($_POST['set_routine'])) {
     }
     setcookie('success_notifier', $day, time() + 3600, '/');
     header('Location: ' . $redirected_to);
-} else if (isset($_POST['new_group_set'])) {
-    setcookie('group_name', $_POST['new_group'], time() + 3600, '/');
+}
+if (isset($_POST['new_group_set'])) {
+    if($_POST[new_group] != NULL){
+        setcookie('group_name_new', $_POST['new_group'], time() + 12000, "/");
+    }
+    setcookie('group', $_POST['group_name'], time() + 3600, '/');
     setcookie('day', $_POST['day'], time() + 3600, '/');
     header('Location: ' . $redirected_to);
 }
@@ -108,15 +115,13 @@ if (isset($_POST['set_routine'])) {
             <div class="col">
                 <select name="group_name">
                     <?php
-                    while ($row = mysql_fetch_array($result2)) {
-                       
-                            echo '<option>' . $row['group'] . '</option>';
-                        
-                    }
-                    if (isset($_COOKIE['group_name'])) {
-                        $new_group = $_COOKIE['group_name'];
+                    if (isset($_COOKIE['group_name_new'])) {
+                        $new_group = $_COOKIE['group_name_new'];
                         echo '<option>' . $new_group . '</option>';
                     }
+                    while ($row = mysql_fetch_array($result2)) {
+                            echo '<option>' . $row['group'] . '</option>';
+                    }    
                     ?>
                 </select>
 
@@ -130,20 +135,22 @@ if (isset($_POST['set_routine'])) {
             <div class="col"></div>
         </div>
     </div>
-    <p>
+    <?php
+    if(isset($_COOKIE['day'])){
+    echo '<p>
     <div class="container">
         <div class="heading">
             <div class="col" style="width:10%">Select</div>
             <div class="col" style="width:20%">Course Code</div>
             <div class="col" style="width:50%">Course Title</div>
             <div class="col" style="width:20%">Time</div>
-        </div>
-        <?php
+        </div>';
+        
         $count = 1;
         while ($row = mysql_fetch_array($result)) {
             $course_code = $row['course_code'];
             $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
-                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `group` = "'.$selected_group.'" AND `day` = "'.$day.'")';
             $resultset_internal = mysql_query($query_internal1);
             $row1 = mysql_fetch_array($resultset_internal);
             if($row1['course_code'] == NULL){
@@ -162,7 +169,7 @@ if (isset($_POST['set_routine'])) {
         while ($row = mysql_fetch_array($result1)) {
             $course_code = $row['course_code'];
             $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'[LAB]" 
-                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `group` = "'.$selected_group.'" AND `day` = "'.$day.'")';
             $resultset_internal = mysql_query($query_internal1);
             $row1 = mysql_fetch_array($resultset_internal);
             if($row1['course_code'] == NULL){
@@ -178,12 +185,11 @@ if (isset($_POST['set_routine'])) {
         </div>';
             $count++;
         }
-        ?>
-        <?php
+        
             //checking updated value for lunch
             $course_code = 'LUNCH';
             $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
-                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `group` = "'.$selected_group.'" AND `day` = "'.$day.'")';
             $resultset_internal = mysql_query($query_internal1);
             $row1 = mysql_fetch_array($resultset_internal);
             if($row1['course_code'] == NULL){
@@ -191,23 +197,28 @@ if (isset($_POST['set_routine'])) {
             }else{
                 $existed_value = $row1['from_and_to'];
             }
-        ?>
-    </div>
+        
+    echo '</div>
     <div class="container">
         <div class="table-row">
-             <div class="col" style="width:10%;border: 1px solid #CCC;"><input type="checkbox" name="choose_this_course_<?php echo $count;?>" value="yes" /></div>
-             <div class="col" style="width:20%;border: 1px solid #CCC;"><input type="hidden" value="LUNCH" name="course_code_<?php echo $count;?>"/> LUNCH </div>
+             <div class="col" style="width:10%;border: 1px solid #CCC;">
+             <input type="checkbox" name="choose_this_course_'.$count.'" value="yes" /></div>
+             <div class="col" style="width:20%;border: 1px solid #CCC;">
+             <input type="hidden" value="LUNCH" name="course_code_'.$count.'"/> LUNCH </div>
              <div class="col" style="width:50%;border: 1px solid #CCC;">LUNCH</div>
-             <div class="col" style="width:20%"><input type="text" value="<?php echo $existed_value; ?>" name="time_to_n_from_<?php echo $count;?>" /></div>
+             <div class="col" style="width:20%">
+             <input type="text" value="'.$existed_value.'" name="time_to_n_from_'.$count.'" /></div>
         </div>
     </div>
     <div class="container">
         <div class="table-row">
-            <div class="col" style="width:10%"><input type="hidden" name="count" value="<?php echo $count; ?>"/></div>
+            <div class="col" style="width:10%"><input type="hidden" name="count" value="'.$count.'"/></div>
             <div class="col" style="width:20%"><input type="submit" name="set_routine" value="SET ROUTINE" /></div>
             <div class="col" style="width:50%"></div>
             <div class="col" style="width:20%"></div>
         </div>
     </div>
-</p>
+</p>';
+}
+?>
 </form>

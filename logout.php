@@ -20,6 +20,9 @@ unset($_SESSION['error']);
 setcookie("department_name", " ", time() - 3600,"/");
 setcookie("semester", " ", time() - 3600,"/");
 setcookie("c_no", " ", time() - 3600,"/");
+setcookie("day", " ", time() - 3600,"/");
+setcookie("group", " ", time() - 3600,"/");
+setcookie("group_name_new", " ", time() - 3600,"/");
 session_destroy();
 header('Location: login.php');
 ?>
