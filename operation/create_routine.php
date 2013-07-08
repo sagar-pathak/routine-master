@@ -73,6 +73,9 @@ if (isset($_POST['set_routine'])) {
 if (isset($_POST['new_group_set'])) {
     if($_POST[new_group] != NULL){
         setcookie('group_name_new', $_POST['new_group'], time() + 12000, "/");
+        setcookie('flag',"set", time() + 12000, "/");
+    }else{
+        setcookie('flag',"not-set", time() + 12000, "/");
     }
     setcookie('group', $_POST['group_name'], time() + 3600, '/');
     setcookie('day', $_POST['day'], time() + 3600, '/');
@@ -136,7 +139,7 @@ if (isset($_POST['new_group_set'])) {
         </div>
     </div>
     <?php
-    if(isset($_COOKIE['day'])){
+    if(isset($_COOKIE['day']) && $_COOKIE['flag'] == "not-set"){
     echo '<p>
     <div class="container">
         <div class="heading">
