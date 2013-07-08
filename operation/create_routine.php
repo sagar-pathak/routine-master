@@ -21,7 +21,7 @@ $query = 'SELECT course_code, course_title FROM ' . $table_name . ' WHERE (depar
 $result = mysql_query($query);
 $query1 = 'SELECT course_code, course_title FROM ' . $table_name . ' WHERE (department_id = ' . $department_id . '  AND semester = ' . $semester . ' AND lab = 1 )';
 $result1 = mysql_query($query1);
-$query2 = 'SELECT DISTINCT group FROM ' . $table_name1;
+$query2 = 'SELECT DISTINCT `group` FROM `'. $table_name1.'`';
 $result2 = mysql_query($query2);
 
 //INSERTING ROUTINE INTO TABLE
@@ -161,7 +161,7 @@ if (isset($_POST['set_routine'])) {
         }
         while ($row = mysql_fetch_array($result1)) {
             $course_code = $row['course_code'];
-            $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
+            $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'[LAB]" 
                        AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
             $resultset_internal = mysql_query($query_internal1);
             $row1 = mysql_fetch_array($resultset_internal);
@@ -179,13 +179,26 @@ if (isset($_POST['set_routine'])) {
             $count++;
         }
         ?>
+        <?php
+            //checking updated value for lunch
+            $course_code = 'LUNCH';
+            $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+            $resultset_internal = mysql_query($query_internal1);
+            $row1 = mysql_fetch_array($resultset_internal);
+            if($row1['course_code'] == NULL){
+                $existed_value = NULL;
+            }else{
+                $existed_value = $row1['from_and_to'];
+            }
+        ?>
     </div>
     <div class="container">
         <div class="table-row">
-             <div class="col" style="width:10%;border: 1px solid #CCC;"><input type="checkbox" name="choose_this_course_<?php $count++;echo $count;?>" value="yes" /></div>
+             <div class="col" style="width:10%;border: 1px solid #CCC;"><input type="checkbox" name="choose_this_course_<?php echo $count;?>" value="yes" /></div>
              <div class="col" style="width:20%;border: 1px solid #CCC;"><input type="hidden" value="LUNCH" name="course_code_<?php echo $count;?>"/> LUNCH </div>
              <div class="col" style="width:50%;border: 1px solid #CCC;">LUNCH</div>
-             <div class="col" style="width:20%"><input type="text" name="time_to_n_from_<?php echo $count;?>" /></div>
+             <div class="col" style="width:20%"><input type="text" value="<?php echo $existed_value; ?>" name="time_to_n_from_<?php echo $count;?>" /></div>
         </div>
     </div>
     <div class="container">
