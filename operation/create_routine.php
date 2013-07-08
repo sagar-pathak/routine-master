@@ -25,19 +25,37 @@ $query2 = 'SELECT DISTINCT group FROM ' . $table_name1;
 $result2 = mysql_query($query2);
 
 //INSERTING ROUTINE INTO TABLE
+if(isset( $_COOKIE['day'])){
+    $day   = $_COOKIE['day'];
+}
 if (isset($_POST['set_routine'])) {
-    $day = $_POST['day'];
     $count = $_POST['count'];
+    $group = $_POST['group_name'];
     $i = 1;
     while ($i <= $count) {
         if ((isset($_POST['choose_this_course_' . $i])) && ($_POST['choose_this_course_' . $i] == 'yes')) {
             $course_code = $_POST['course_code_' . $i];
             $time = $_POST['time_to_n_from_' . $i];
-
-            $query = 'INSERT INTO `routine`(`course_code`, `department_id`, 
-                `semester`, `day`, `from_and_to`) VALUES ("' . $course_code . '",' . $department_id . ',
-                ' . $semester . ',"' . $day . '","' . $time . '")';
-            if (mysql_query($query)) {
+            
+            //check whether the routine has been already set up or not
+            //TODO: error arising
+            $query_internal = 'SELECT course_code FROM routine where (`course_code` = "'.$course_code.'" 
+                 AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+            $result_set_number=mysql_query($query_internal);
+            $row=  mysql_fetch_array($result_set_number);
+            if($row['course_code']==NULL){
+                //insert if not exists.
+                $query_dynamic = 'INSERT INTO `routine`(`course_code`, `department_id`, 
+                `semester`,`group`,  `day`, `from_and_to`) VALUES ("' . $course_code . '",' . $department_id . ',
+                ' . $semester . ',"'.$group.'", "' . $day . '","' . $time . '")';
+            }else{
+               //update if already exists.
+               $query_dynamic = 'UPDATE `routine` SET 
+                   `from_and_to`= "'.$time.'" WHERE (`course_code` = "'.$course_code.'" 
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' 
+                           AND `group` = "'.$group.'" AND `day` = "'.$day.'")';
+            }         
+            if (mysql_query($query_dynamic)) {
                 
             } else {
                 die(mysql_error());
@@ -50,6 +68,7 @@ if (isset($_POST['set_routine'])) {
     header('Location: ' . $redirected_to);
 } else if (isset($_POST['new_group_set'])) {
     setcookie('group_name', $_POST['new_group'], time() + 3600, '/');
+    setcookie('day', $_POST['day'], time() + 3600, '/');
     header('Location: ' . $redirected_to);
 }
 ?>
@@ -122,20 +141,40 @@ if (isset($_POST['set_routine'])) {
         <?php
         $count = 1;
         while ($row = mysql_fetch_array($result)) {
+            $course_code = $row['course_code'];
+            $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+            $resultset_internal = mysql_query($query_internal1);
+            $row1 = mysql_fetch_array($resultset_internal);
+            if($row1['course_code'] == NULL){
+                $existed_value = NULL;
+            }else{
+                $existed_value = $row1['from_and_to'];
+            }
             echo '<div class="table-row">
-            <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_' . $count . '" value="yes" /></div>
+             <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_' . $count . '" value="yes" /></div>
              <div class="col" style="width:20%"><input type="hidden" value="' . $row['course_code'] . '" name="course_code_' . $count . '"/> ' . $row['course_code'] . '</div>
              <div class="col" style="width:50%">' . $row['course_title'] . '</div>
-             <div class="col" style="width:20%"><input type="text" name="time_to_n_from_' . $count . '" /></div>
+             <div class="col" style="width:20%"><input type="text" value="'.$existed_value.'" name="time_to_n_from_' . $count . '" /></div>
         </div>';
             $count++;
         }
         while ($row = mysql_fetch_array($result1)) {
+            $course_code = $row['course_code'];
+            $query_internal1 = 'SELECT course_code, from_and_to FROM routine WHERE  (`course_code` = "'.$course_code.'" 
+                       AND `department_id` = '.$department_id.' AND `semester` = '.$semester.' AND `day` = "'.$day.'")';
+            $resultset_internal = mysql_query($query_internal1);
+            $row1 = mysql_fetch_array($resultset_internal);
+            if($row1['course_code'] == NULL){
+                $existed_value = NULL;
+            }else{
+                $existed_value = $row1['from_and_to'];
+            }
             echo '<div class="table-row">
              <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_' . $count . '" value="yes" /></div>
              <div class="col" style="width:20%"><input type="hidden" value="' . $row['course_code'] . '[LAB]" name="course_code_' . $count . '"/> ' . $row['course_code'] . ' [LAB]</div>
              <div class="col" style="width:50%">' . $row['course_title'] . ' [LAB]</div>
-             <div class="col" style="width:20%"><input type="text" name="time_to_n_from_' . $count . '" /></div>
+             <div class="col" style="width:20%"><input type="text" value="'.$existed_value.'" name="time_to_n_from_' . $count . '" /></div>
         </div>';
             $count++;
         }
