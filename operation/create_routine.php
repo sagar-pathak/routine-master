@@ -68,14 +68,15 @@ if (isset($_POST['set_routine'])) {
         $i++;
     }
     setcookie('success_notifier', $day, time() + 3600, '/');
+     setcookie('group_name_new', $_POST['new_group'], time() - 3600, "/");
     header('Location: ' . $redirected_to);
 }
 if (isset($_POST['new_group_set'])) {
     if($_POST[new_group] != NULL){
-        setcookie('group_name_new', $_POST['new_group'], time() + 12000, "/");
-        setcookie('flag',"set", time() + 12000, "/");
+        setcookie('group_name_new', $_POST['new_group'], time() + 3600, "/");
+        setcookie('flag',"set", time() + 3600, "/");
     }else{
-        setcookie('flag',"not-set", time() + 12000, "/");
+        setcookie('flag',"not-set", time() + 3600, "/");
     }
     setcookie('group', $_POST['group_name'], time() + 3600, '/');
     setcookie('day', $_POST['day'], time() + 3600, '/');
@@ -123,7 +124,7 @@ if (isset($_POST['new_group_set'])) {
                         echo '<option>' . $new_group . '</option>';
                     }
                     while ($row = mysql_fetch_array($result2)) {
-                            echo '<option>' . $row['group'] . '</option>';
+                            echo '<option ';if(isset($selected_group)){if($row['group'] == $selected_group){ echo 'selected';}} echo '>' . $row['group'] . '</option>';
                     }    
                     ?>
                 </select>
@@ -162,7 +163,7 @@ if (isset($_POST['new_group_set'])) {
                 $existed_value = $row1['from_and_to'];
             }
             echo '<div class="table-row">
-             <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_' . $count . '" value="yes" /></div>
+             <div class="col" style="width:10%"><input type="checkbox" ';if($existed_value != NULL){echo 'checked';} echo ' name="choose_this_course_' . $count . '" value="yes" /></div>
              <div class="col" style="width:20%"><input type="hidden" value="' . $row['course_code'] . '" name="course_code_' . $count . '"/> ' . $row['course_code'] . '</div>
              <div class="col" style="width:50%">' . $row['course_title'] . '</div>
              <div class="col" style="width:20%"><input type="text" value="'.$existed_value.'" name="time_to_n_from_' . $count . '" /></div>
@@ -181,7 +182,7 @@ if (isset($_POST['new_group_set'])) {
                 $existed_value = $row1['from_and_to'];
             }
             echo '<div class="table-row">
-             <div class="col" style="width:10%"><input type="checkbox" name="choose_this_course_' . $count . '" value="yes" /></div>
+             <div class="col" style="width:10%"><input type="checkbox" ';if($existed_value != NULL){echo ' checked ';} echo 'name="choose_this_course_' . $count . '" value="yes" /></div>
              <div class="col" style="width:20%"><input type="hidden" value="' . $row['course_code'] . '[LAB]" name="course_code_' . $count . '"/> ' . $row['course_code'] . ' [LAB]</div>
              <div class="col" style="width:50%">' . $row['course_title'] . ' [LAB]</div>
              <div class="col" style="width:20%"><input type="text" value="'.$existed_value.'" name="time_to_n_from_' . $count . '" /></div>
@@ -205,7 +206,7 @@ if (isset($_POST['new_group_set'])) {
     <div class="container">
         <div class="table-row">
              <div class="col" style="width:10%;border: 1px solid #CCC;">
-             <input type="checkbox" name="choose_this_course_'.$count.'" value="yes" /></div>
+             <input type="checkbox" '; if($existed_value != NULL){echo ' checked ';} echo 'name="choose_this_course_'.$count.'" value="yes" /></div>
              <div class="col" style="width:20%;border: 1px solid #CCC;">
              <input type="hidden" value="LUNCH" name="course_code_'.$count.'"/> LUNCH </div>
              <div class="col" style="width:50%;border: 1px solid #CCC;">LUNCH</div>
