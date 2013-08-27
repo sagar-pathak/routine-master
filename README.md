@@ -5,9 +5,5 @@ Routine Master is an Android application project which fetchs the classroom rout
 
 <b>Project Member</b><br/>
 Sagar Pathak (Roll No: 31) <br/>
-Prajwol Shrestha (Roll No: 09) <br/>
-Sunita Giri (Roll No: 27) <br/>
-Pravin Basyal (Roll No: 33) <br/>
-Ruchi Timilsina (Roll No: 69)  </br>
 
 This project is a part of our course "Embedded System" in <a href="www.ku.edu.np">Kathmandu University</a>
