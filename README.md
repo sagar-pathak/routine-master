@@ -6,4 +6,4 @@ Routine Master is an Android application project which fetchs the classroom rout
 <b>Project Member</b><br/>
 Sagar Pathak (Roll No: 31) <br/>
 
-This project is a part of our course "Embedded System" in <a href="www.ku.edu.np">Kathmandu University</a>
+This project is a part of our course "Embedded System" and "Human Computer Interaction" in <a href="www.ku.edu.np">Kathmandu University</a>
